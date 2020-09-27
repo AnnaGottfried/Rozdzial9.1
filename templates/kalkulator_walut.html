@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Kalkulator NPB</title>
+
+      <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+
+    </head>
+    <body>
+        <h1> Kalkulator walut obcych po kursie NBP</h1>
+
+
+
+ <form method="POST">
+  <label for="waluta">Wybierz walutę:</label>
+  <select id="waluta" name="waluta"  >
+        {% for item in data %}
+        <option value=" {{ item['currency'] }}"> {{ item['currency'] }}</option>
+         {% endfor %}
+  </select>
+     <br><br>
+     <label for="fname">Wybierz ilość:</label>
+ <!-- <input type="text" id="ilosc" name="ilosc" value= {{ilosc }} min="0"> -->
+  <input type="text" id="ilosc"  name="ilosc" value= {{ilosc }} >
+     <label for="fname">Wybrałeś : </label>
+  <input type="text" id="waluta1" name="waluta1" size="50" value=" {{waluta1 }}" readonly>
+
+
+     <label for="fname">Wartość:</label>
+  <input type="text" id="wynik" name="wynik" value= {{wynik }} readonly>
+
+  <input type="submit" value="Przelicz">
+
+     <br>
+     <br><br><br><br>
+</form>
+    <p style="color:Tomato;;"> {{message1}}</p>
+    <p  style="color:Tomato;;">{{opis}} </p>
+
+  <table>
+  <tr>
+    <th>Nazwa waluty</th>
+    <th>Kod waluty</th>
+    <th>Kurs kupna:</th>
+      <th>Kurs sprzedaży</th>
+  </tr>
+       {% for item in data %}
+  <tr>
+    <td>{{ item['currency'] }}</td>
+    <td>{{ item['code'] }}</td>
+    <td>{{ item['bid'] }}</td>
+      <td>{{ item['ask'] }}</td>
+  </tr>
+      {% endfor %}
+  </table>
+
+
+
+    <p> Ponwyższe ceny walut są ze strony NBP <a href="https://www.nbp.pl/home.aspx?f=/kursy/kursyc.html">tabela NBP</a>
+
+        </p>
+
+
+    </body>
+</html>
